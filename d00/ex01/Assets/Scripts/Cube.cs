@@ -16,21 +16,24 @@ public class Cube : MonoBehaviour {
 		if (letter == 'A') {
 			if (Input.GetKeyDown (KeyCode.A)) {
 				GameObject.Destroy (this.gameObject);
+                Debug.Log("Precision: " + (-(-4 - transform.position.y)) * 10);
 			}
 		}
 
 		if (letter == 'S') {
 			if (Input.GetKeyDown (KeyCode.S)) {
 				GameObject.Destroy (this.gameObject);
-			}
+                Debug.Log("Precision: " + (-(-4 - transform.position.y)) * 10);
+            }
 		}
 
 		if (letter == 'D') {
 			if (Input.GetKeyDown (KeyCode.D)) {
 				GameObject.Destroy (this.gameObject);
-			}
+                Debug.Log("Precision: " + (-(-4 - transform.position.y)) * 10);
+            }
 		}
-		transform.localPosition += new Vector3 (0.0f, -speed, 0.0f);
+        transform.Translate(0.0f, -speed, 0.0f);
 		if (transform.localPosition.y < -4.0f) {
 			GameObject.Destroy (this.gameObject);
 		}

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Sprites/ex01.unity
+- path: Assets/Scenes/ex01.unity
   isLoaded: 1
   isActive: 1
