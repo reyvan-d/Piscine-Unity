@@ -8,11 +8,13 @@ public class playerScript_ex00 : MonoBehaviour {
 	private float speed;
 	private bool canJump;
 	public bool alive;
+    public Vector3 BeginPos;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 		speed = 10.0f;
+        BeginPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 	}
 
 	void OnCollisionEnter2D (Collision2D collision)
@@ -55,5 +57,13 @@ public class playerScript_ex00 : MonoBehaviour {
 		} else if (Input.GetKeyDown (KeyCode.Alpha3) && this.gameObject.name == "blue") {
 			alive = true;
 		}
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = BeginPos;
+            if (name != "red")
+                alive = false;
+            else
+                alive = true;
+        }
 	}
 }
