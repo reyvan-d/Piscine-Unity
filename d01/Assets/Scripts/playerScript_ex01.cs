@@ -10,7 +10,7 @@ public class playerScript_ex01 : MonoBehaviour
     private float speed;
     private bool canJump;
     public bool alive;
-    public Vector3 BeginPos;
+    private Vector3 BeginPos;
 
     // Use this for initialization
     void Start()
@@ -27,7 +27,7 @@ public class playerScript_ex01 : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "PlatformWhiteSprite" || collision.gameObject.name == "red" || collision.gameObject.name == "yellow" || collision.gameObject.name == "blue")
+        if (collision.gameObject.name == "PlatformWhiteSprite" || collision.gameObject.name == "red" || collision.gameObject.name == "yellow" || collision.gameObject.name == "blue" || collision.gameObject.tag == "canJump")
         {
             canJump = true;
         }
@@ -35,6 +35,11 @@ public class playerScript_ex01 : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+        if (collider.gameObject.name == "TeleportIN")
+        {
+            Vector3 translate = new Vector3(GameObject.Find("TeleportOUT").transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+            transform.localPosition = translate;
+        }
         if (name == "red" && collider.gameObject.name == "red_exit")
             GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitRed = true;
         if (name == "yellow" && collider.gameObject.name == "yellow_exit")
@@ -44,7 +49,10 @@ public class playerScript_ex01 : MonoBehaviour
         if (GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitRed && GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitYellow && GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitBlue)
         {
             Debug.Log("Level complete");
-            SceneManager.LoadScene(1);
+            int currentScene = SceneManager.GetActiveScene().buildIndex;
+            if (currentScene < 2)
+                currentScene++;
+            SceneManager.LoadScene(currentScene);
         }
     }
 
@@ -77,7 +85,7 @@ public class playerScript_ex01 : MonoBehaviour
                     else if (name == "yellow")
                         force = new Vector2(0.0f, 450.0f);
                     else
-                        force = new Vector2(0.0f, 250.0f);
+                        force = new Vector2(0.0f, 270.0f);
                     rb.AddForce(force);
                     canJump = false;
                 }
