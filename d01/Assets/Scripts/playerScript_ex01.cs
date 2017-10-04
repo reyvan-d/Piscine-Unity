@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerScript_ex01 : MonoBehaviour
 {
@@ -41,7 +42,10 @@ public class playerScript_ex01 : MonoBehaviour
         if (name == "blue" && collider.gameObject.name == "blue_exit")
             GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitBlue = true;
         if (GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitRed && GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitYellow && GameObject.Find("Main Camera").GetComponent<CameraController_ex01>().exitBlue)
+        {
             Debug.Log("Level complete");
+            SceneManager.LoadScene(1);
+        }
     }
 
     void OnTriggerExit2D(Collider2D collider)
@@ -73,7 +77,7 @@ public class playerScript_ex01 : MonoBehaviour
                     else if (name == "yellow")
                         force = new Vector2(0.0f, 450.0f);
                     else
-                        force = new Vector2(0.0f, 200.0f);
+                        force = new Vector2(0.0f, 250.0f);
                     rb.AddForce(force);
                     canJump = false;
                 }
